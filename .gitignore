@@ -1,0 +1,12 @@
+.venv/
+__pycache__/
+*.pyc
+.env
+.pytest_cache/
+.mypy_cache/
+app/ml/artifacts/*.joblib
+app/ml/artifacts/*.json
+!app/ml/artifacts/.gitkeep
+data/*.csv
+data/*.parquet
+.DS_Store
