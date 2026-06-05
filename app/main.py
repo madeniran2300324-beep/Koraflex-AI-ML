@@ -23,6 +23,7 @@ from app.api import (
     login_router,
     network_router,
 )
+from app.api.admin import router as admin_router
 from app.api.dashboards import router as dashboard_router
 from app.core.config import settings
 from app.core.logging import configure_logging, get_logger
@@ -92,5 +93,5 @@ app.include_router(feedback_router,     prefix="/v1/feedback",       tags=["feed
 app.include_router(network_router,      prefix="/v1/fraud",          tags=["network-analysis"])
 app.include_router(data_quality_router, prefix="/v1/data-quality",   tags=["data-quality"])
 # FIX: dashboards now served inside the app, not as orphaned Streamlit processes
-app.include_router(dashboard_router,    prefix="/v1/dashboards",     tags=["dashboards"])
+app.include_router(dashboard_router,    prefix="/v1/admin",     tags=["admin"])
 app.include_router(admin_router, prefix="/v1/admin", tags=["admin"])
