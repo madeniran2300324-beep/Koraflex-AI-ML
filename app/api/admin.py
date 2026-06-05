@@ -1,16 +1,4 @@
 """Admin API — runtime threshold management for ops team.
-
-FIXES the "thresholds are static env vars, no ops control" gap:
-- Previously, FRAUD_AUTO_BLOCK_THRESHOLD and FRAUD_REVIEW_THRESHOLD could only
-  be changed via an env-var update + redeploy.
-- This module adds:
-    * GET  /v1/admin/thresholds        — view current live thresholds
-    * PUT  /v1/admin/thresholds        — update thresholds (persisted to Redis)
-    * GET  /v1/admin/thresholds/history — audit trail of threshold changes
-
-Thresholds are stored in Redis so they survive worker restarts without a
-redeploy, and are loaded at startup to override config defaults.
-
 Authentication uses the same JWT_SECRET Bearer check as the dashboard router.
 All changes are audit-logged to MongoDB (threshold_changes collection).
 """

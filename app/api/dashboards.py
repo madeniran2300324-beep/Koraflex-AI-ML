@@ -1,16 +1,5 @@
 """Dashboard integration for KoraFlex AI — mounts both Streamlit apps as
 sub-processes and proxies them behind a FastAPI router with Bearer-token auth.
-
-FIXES the "orphaned Streamlit scripts" gap:
-- Previously, data_quality_dashboard.py and fraud_analytics_dashboard.py
-  were standalone scripts unreachable from the deployed service.
-- This module adds a /v1/dashboards/* router that:
-    1. Lazily spawns each Streamlit process on first request (8501, 8502).
-    2. Reverse-proxies requests via httpx so a single Render service serves
-       the dashboards without extra infrastructure.
-    3. Gates every request behind the same JWT_SECRET used by the main app,
-       so the dashboards are not publicly accessible.
-
 Usage (already wired in main.py patch below):
     app.include_router(dashboard_router, prefix="/v1/dashboards", tags=["dashboards"])
 """
