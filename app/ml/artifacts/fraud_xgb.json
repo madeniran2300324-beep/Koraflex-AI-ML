@@ -1,5 +1,5 @@
 {
-  "version": "20260608-073705",
+  "version": "20260608-081020",
   "feature_order": [
     "amount",
     "user_age_days",
@@ -59,7 +59,7 @@
         "support": 4000.0
       }
     },
-    "trained_at": "2026-06-08T07:37:05.214606",
+    "trained_at": "2026-06-08T08:10:20.492967",
     "n_train": 16000,
     "n_test": 4000
   },
