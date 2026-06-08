@@ -2,7 +2,7 @@ from fastapi import APIRouter, Query
 
 from app.db.mongo import db
 from app.schemas.common import ScoreResponse, TransactionPayload
-from app.services.fraud.transaction import score_transaction
+from app.services.fraud.scoring import score_transaction
 
 router = APIRouter()
 
