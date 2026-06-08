@@ -31,7 +31,7 @@ async def score_login(payload: LoginPayload) -> dict:
     recent = await r.lrange(key, 0, 49)
     last_5min = sum(
         1 for ts in recent
-        if datetime.fromisoformat(ts) > datetime.utcnow() - timedelta(minutes=5)
+        if datetime.fromisoformat(ts).replace(tzinfo=None) > datetime.utcnow() - timedelta(minutes=5)
     )
     if last_5min >= 5:
         score += 25
