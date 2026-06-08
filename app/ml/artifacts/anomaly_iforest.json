@@ -1,0 +1,23 @@
+{
+  "version": "20260608-064335",
+  "feature_order": [
+    "amount",
+    "user_age_days",
+    "account_age_minutes",
+    "is_new_user",
+    "high_value_new_user",
+    "tx_count_5m",
+    "tx_amount_5m",
+    "tx_count_1h",
+    "tx_amount_1h",
+    "tx_count_24h",
+    "tx_amount_24h",
+    "device_tx_count_1h",
+    "ip_tx_count_1h",
+    "device_unique_users_24h",
+    "device_is_known",
+    "device_account_age_days",
+    "ip_unique_users_1h"
+  ],
+  "trained_on": "legit-only synthetic"
+}
