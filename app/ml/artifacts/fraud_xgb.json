@@ -1,5 +1,5 @@
 {
-  "version": "20260608-064335",
+  "version": "20260608-073705",
   "feature_order": [
     "amount",
     "user_age_days",
@@ -59,8 +59,43 @@
         "support": 4000.0
       }
     },
-    "trained_at": "2026-06-08T06:43:35.212215",
+    "trained_at": "2026-06-08T07:37:05.214606",
     "n_train": 16000,
     "n_test": 4000
+  },
+  "bias_audit": {
+    "per_group": {
+      "A": {
+        "n": 1584,
+        "actual_fraud_rate": 0.061237373737373736,
+        "flagged_rate": 0.061237373737373736,
+        "tpr": 1.0,
+        "fpr": 0.0
+      },
+      "B": {
+        "n": 1175,
+        "actual_fraud_rate": 0.06723404255319149,
+        "flagged_rate": 0.06723404255319149,
+        "tpr": 1.0,
+        "fpr": 0.0
+      },
+      "C": {
+        "n": 844,
+        "actual_fraud_rate": 0.05924170616113744,
+        "flagged_rate": 0.05924170616113744,
+        "tpr": 1.0,
+        "fpr": 0.0
+      },
+      "D": {
+        "n": 397,
+        "actual_fraud_rate": 0.03526448362720403,
+        "flagged_rate": 0.03526448362720403,
+        "tpr": 1.0,
+        "fpr": 0.0
+      }
+    },
+    "demographic_parity_gap": 0.031969558925987455,
+    "equal_opportunity_gap": 0.0,
+    "passes": true
   }
 }
