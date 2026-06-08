@@ -56,12 +56,12 @@ async def compute_velocity_features(tx: TransactionPayload) -> dict:
         return out
 
     def _window(parsed: list[tuple[datetime, float, str]], minutes: int):
-    cutoff = datetime.utcnow() - timedelta(minutes=minutes)
-    subset = [(ts, amt, uid) for ts, amt, uid in parsed if ts.replace(tzinfo=None) >= cutoff]
-    count  = len(subset)
-    total  = sum(amt for _, amt, _ in subset)
-    users  = {uid for _, _, uid in subset if uid}
-    return count, total, users
+        cutoff = datetime.utcnow() - timedelta(minutes=minutes)
+        subset = [(ts, amt, uid) for ts, amt, uid in parsed if ts.replace(tzinfo=None) >= cutoff]
+        count  = len(subset)
+        total  = sum(amt for _, amt, _ in subset)
+        users  = {uid for _, _, uid in subset if uid}
+        return count, total, users
 
     user_entries   = await r.lrange(user_key, 0, 199)
     device_entries = await r.lrange(device_key, 0, 199)
