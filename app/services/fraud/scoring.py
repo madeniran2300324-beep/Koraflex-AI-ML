@@ -25,7 +25,7 @@ from app.services.fraud.velocity import compute_velocity_features
 
 log = get_logger(__name__)
 
-_BUDGET_S = getattr(settings, "LATENCY_BUDGET_MS", 480) / 1000.0
+_BUDGET_S = getattr(settings, "LATENCY_BUDGET_MS", 15000) / 1000.0
 
 
 def _band(score: int) -> str:
