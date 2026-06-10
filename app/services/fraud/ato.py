@@ -60,7 +60,7 @@ async def score_login(payload: LoginPayload) -> dict:
     )
     if last_login and payload.geo_country and last_login.get("geo_country"):
         if payload.geo_country != last_login["geo_country"]:
-            delta = (payload.timestamp - last_login["timestamp"]).total_seconds() / 3600.0
+            delta = (payload.timestamp.replace(tzinfo=None) - last_login["timestamp"].replace(tzinfo=None)).total_seconds() / 3600.0
             if delta < 2:
                 score += 35
                 reasons.append(
