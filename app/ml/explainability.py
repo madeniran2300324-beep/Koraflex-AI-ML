@@ -73,38 +73,26 @@ def format_reason_codes(
     shap_pairs: list[tuple[str, float]],
     threshold: float = 0.01,
 ) -> list[str]:
-    """
-    Convert SHAP (feature, value) pairs into human-readable reason strings.
-
-    Only includes features whose |shap| ≥ threshold to avoid noise.
-
-    Examples
-    --------
-    "tx_count_5m increased risk by +0.18 (4 transactions in 5 min)"
-    "device_unique_users_24h increased risk by +0.14 (device shared by 7 users today)"
-    """
     FRIENDLY: dict[str, str] = {
-        "tx_count_5m":              "rapid transaction burst (5 min window)",
-        "tx_count_1h":              "high transaction count (1 hr window)",
-        "tx_amount_1h":             "large transaction volume (1 hr window)",
-        "device_unique_users_24h":  "device shared across multiple accounts today",
-        "device_is_known":          "unrecognised device",
-        "device_account_age_days":  "very new device with short account history",
-        "ip_unique_users_1h":       "IP shared by many users this hour",
-        "ip_tx_count_1h":           "high IP-level transaction rate",
-        "high_value_new_user":      "large purchase by a brand-new account",
-        "is_new_user":              "account is less than 7 days old",
-        "amount":                   "transaction amount",
-        "user_age_days":            "account age",
+        "tx_count_5m":              "Rapid transaction burst in 5 minutes",
+        "tx_count_1h":              "High transaction count in last hour",
+        "tx_amount_1h":             "Large transaction volume in last hour",
+        "device_unique_users_24h":  "Device linked to multiple accounts today",
+        "device_is_known":          "Transaction from an unrecognised device",
+        "device_account_age_days":  "Device associated with very new accounts only",
+        "ip_unique_users_1h":       "IP address shared by multiple users this hour",
+        "ip_tx_count_1h":           "High transaction rate from this IP",
+        "high_value_new_user":      "Large purchase from a brand-new account",
+        "is_new_user":              "Account created less than 7 days ago",
+        "amount":                   "Transaction amount is unusually high",
+        "user_age_days":            "Very new user account",
+        "account_age_minutes":      "Account created very recently",
     }
 
     reasons = []
     for feature, shap_val in shap_pairs:
-        if abs(shap_val) < threshold:
+        if shap_val < threshold:  # only show risk-increasing factors
             continue
-        direction = "increased" if shap_val > 0 else "decreased"
         label = FRIENDLY.get(feature, feature.replace("_", " "))
-        reasons.append(
-            f"{label} {direction} risk by {shap_val:+.2f}"
-        )
+        reasons.append(f"{label} increased risk by {shap_val:+.2f}")
     return reasons

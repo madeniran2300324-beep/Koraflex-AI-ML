@@ -34,4 +34,22 @@ def evaluate_rules(tx: TransactionPayload, features: dict) -> tuple[int, list[st
         reasons.append("Non-positive amount")
         triggered.append("invalid_amount")
 
+    # New account under 7 days making any significant purchase
+    if features.get("is_new_user") and tx.amount > 50_000:
+        score += 20
+        reasons.append("Account under 7 days old making significant purchase")
+        triggered.append("new_user_elevated")
+
+    # Device shared across multiple accounts — strong fraud signal
+    if features.get("device_unique_users_24h", 1) >= 3:
+        score += 30
+        reasons.append(f"Device linked to {int(features['device_unique_users_24h'])} accounts today")
+        triggered.append("device_sharing")
+
+    # Account less than 1 hour old attempting any transaction
+    if tx.account_age_minutes < 60:
+        score += 35
+        reasons.append("Account less than 1 hour old")
+        triggered.append("fresh_account")
+
     return min(100, score), reasons, triggered
