@@ -31,8 +31,8 @@ class Settings(BaseSettings):
 
     MONO_FRESHNESS_MAX_AGE_MIN: int = 60
 
-    FRAUD_AUTO_BLOCK_THRESHOLD: int = 85
-    FRAUD_REVIEW_THRESHOLD:     int = 50
+    FRAUD_AUTO_BLOCK_THRESHOLD: int = 70
+    FRAUD_REVIEW_THRESHOLD:     int = 35
 
     # Latency SLA for the fraud scoring pipeline (ms).
     # Falls back to rules-only if the ML pipeline exceeds this budget.
