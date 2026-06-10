@@ -90,6 +90,27 @@ def make_dataset(n: int = 20_000, fraud_ratio: float = 0.06, seed: int = 42) -> 
     fraud["tx_amount_24h"] = fraud["amount"] * fraud["tx_count_24h"] * rng.uniform(0.8, 1.5, n_fraud)
     fraud["is_fraud"] = 1
 
+    # Make ~15% of fraud cases look more like legit (harder cases = realistic model)
+    n_hard = int(n_fraud * 0.15)
+    rng2 = np.random.default_rng(seed + 1)
+    idx = list(range(n_hard + 1))
+    fraud.loc[:n_hard, 'amount'] = rng2.lognormal(mean=9.5, sigma=0.9, size=n_hard + 1).clip(500, 1_500_000)
+    fraud.loc[:n_hard, 'user_age_days'] = rng2.integers(8, 60, size=n_hard + 1)
+    fraud.loc[:n_hard, 'account_age_minutes'] = rng2.integers(1440, 1_000_000, size=n_hard + 1)
+    fraud.loc[:n_hard, 'tx_count_5m'] = rng2.poisson(0.2, size=n_hard + 1)
+    fraud.loc[:n_hard, 'tx_count_1h'] = rng2.poisson(0.6, size=n_hard + 1)
+    fraud.loc[:n_hard, 'tx_count_24h'] = rng2.poisson(2.5, size=n_hard + 1)
+    fraud.loc[:n_hard, 'device_tx_count_1h'] = rng2.poisson(0.8, size=n_hard + 1)
+    fraud.loc[:n_hard, 'ip_tx_count_1h'] = rng2.poisson(1.0, size=n_hard + 1)
+    fraud.loc[:n_hard, 'device_is_known'] = rng2.choice([0, 1], size=n_hard + 1, p=[0.15, 0.85])
+    fraud.loc[:n_hard, 'device_unique_users_24h'] = rng2.integers(1, 3, size=n_hard + 1)
+    fraud.loc[:n_hard, 'device_account_age_days'] = rng2.integers(30, 720, size=n_hard + 1)
+    fraud.loc[:n_hard, 'ip_unique_users_1h'] = rng2.integers(1, 3, size=n_hard + 1)
+    # Recalculate amount-derived features for hard cases
+    fraud.loc[:n_hard, 'tx_amount_5m'] = fraud.loc[:n_hard, 'amount'] * fraud.loc[:n_hard, 'tx_count_5m'] * rng2.uniform(0.5, 1.2, n_hard + 1)
+    fraud.loc[:n_hard, 'tx_amount_1h'] = fraud.loc[:n_hard, 'amount'] * fraud.loc[:n_hard, 'tx_count_1h'] * rng2.uniform(0.5, 1.2, n_hard + 1)
+    fraud.loc[:n_hard, 'tx_amount_24h'] = fraud.loc[:n_hard, 'amount'] * fraud.loc[:n_hard, 'tx_count_24h'] * rng2.uniform(0.5, 1.2, n_hard + 1)
+    
     df = (
         pd.concat([legit, fraud], ignore_index=True)
         .sample(frac=1, random_state=seed)

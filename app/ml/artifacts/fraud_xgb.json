@@ -1,5 +1,5 @@
 {
-  "version": "20260608-081020",
+  "version": "20260610-120356",
   "feature_order": [
     "amount",
     "user_age_days",
@@ -20,46 +20,46 @@
     "ip_unique_users_1h"
   ],
   "metrics": {
-    "roc_auc": 1.0,
-    "pr_auc": 1.0,
+    "roc_auc": 0.9970423315602837,
+    "pr_auc": 0.9743622698937026,
     "confusion_matrix": [
       [
-        3760,
-        0
+        3755,
+        5
       ],
       [
-        0,
-        240
+        18,
+        222
       ]
     ],
     "report": {
       "0": {
-        "precision": 1.0,
-        "recall": 1.0,
-        "f1-score": 1.0,
+        "precision": 0.995229260535383,
+        "recall": 0.9986702127659575,
+        "f1-score": 0.9969467675560866,
         "support": 3760.0
       },
       "1": {
-        "precision": 1.0,
-        "recall": 1.0,
-        "f1-score": 1.0,
+        "precision": 0.9779735682819384,
+        "recall": 0.925,
+        "f1-score": 0.9507494646680942,
         "support": 240.0
       },
-      "accuracy": 1.0,
+      "accuracy": 0.99425,
       "macro avg": {
-        "precision": 1.0,
-        "recall": 1.0,
-        "f1-score": 1.0,
+        "precision": 0.9866014144086607,
+        "recall": 0.9618351063829788,
+        "f1-score": 0.9738481161120904,
         "support": 4000.0
       },
       "weighted avg": {
-        "precision": 1.0,
-        "recall": 1.0,
-        "f1-score": 1.0,
+        "precision": 0.9941939190001763,
+        "recall": 0.99425,
+        "f1-score": 0.994174929382807,
         "support": 4000.0
       }
     },
-    "trained_at": "2026-06-08T08:10:20.492967",
+    "trained_at": "2026-06-10T12:03:56.618105",
     "n_train": 16000,
     "n_test": 4000
   },
@@ -68,34 +68,34 @@
       "A": {
         "n": 1584,
         "actual_fraud_rate": 0.061237373737373736,
-        "flagged_rate": 0.061237373737373736,
-        "tpr": 1.0,
-        "fpr": 0.0
+        "flagged_rate": 0.06060606060606061,
+        "tpr": 0.9587628865979382,
+        "fpr": 0.0020174848688634837
       },
       "B": {
         "n": 1175,
         "actual_fraud_rate": 0.06723404255319149,
-        "flagged_rate": 0.06723404255319149,
-        "tpr": 1.0,
-        "fpr": 0.0
+        "flagged_rate": 0.06127659574468085,
+        "tpr": 0.8987341772151899,
+        "fpr": 0.0009124087591240876
       },
       "C": {
         "n": 844,
         "actual_fraud_rate": 0.05924170616113744,
-        "flagged_rate": 0.05924170616113744,
-        "tpr": 1.0,
-        "fpr": 0.0
+        "flagged_rate": 0.05687203791469194,
+        "tpr": 0.94,
+        "fpr": 0.0012594458438287153
       },
       "D": {
         "n": 397,
         "actual_fraud_rate": 0.03526448362720403,
-        "flagged_rate": 0.03526448362720403,
-        "tpr": 1.0,
+        "flagged_rate": 0.027707808564231738,
+        "tpr": 0.7857142857142857,
         "fpr": 0.0
       }
     },
-    "demographic_parity_gap": 0.031969558925987455,
-    "equal_opportunity_gap": 0.0,
-    "passes": true
+    "demographic_parity_gap": 0.03356878718044911,
+    "equal_opportunity_gap": 0.17304860088365248,
+    "passes": false
   }
 }
